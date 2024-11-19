@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
@@ -12,23 +13,37 @@ public class Main {
                 sc.close();
                 break;
             } else if (command.equals("등록")) {
-                Wise.wise(sc, id);
+                Wise.addWise(sc, id);
                 id += 1;
+            } else if (command.equals("목록")) {
+                System.out.println("번호 / 작가 / 명언");
+                System.out.println("----------------------");
+                for(int i = 1; i < id; i++) {
+                    System.out.print(Wise.getWise(-i));
+                    System.out.print(" / ");
+                    System.out.print(Wise.getWise(-i));
+                    System.out.print(" / ");
+                    System.out.println(Wise.getWise(-i));
+                }
             }
         }
     }
 }
 
 class Wise {
-    public static void wise(Scanner sc, int id) {
-        String[] wises = new String[3];
+    private static ArrayList<String> wises = new ArrayList<>();
+
+    public static void addWise(Scanner sc, int id) {
         System.out.print("명언 : ");
-        wises[0] = sc.nextLine().trim();
+        wises.add(sc.nextLine().trim());
 
         System.out.print("작가 : ");
-        wises[1] = sc.nextLine().trim();
+        wises.add(sc.nextLine().trim());
 
-        wises[2] = String.valueOf(id);
+        wises.add(String.valueOf(id));
         System.out.println(id + "번 명언이 등록되었습니다.");
+    }
+    public static String[] getWise(int i) {
+        return wises[i];
     }
 }
