@@ -1,5 +1,5 @@
 public class Wise {
-    private int id;
+    protected int id;
     private String author;
     private String saying;
 

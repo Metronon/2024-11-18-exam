@@ -36,17 +36,11 @@ public class Controller {
     public void removeWise(String cmd) {
         String[] parts = cmd.split("=");
         int idToRemove = Integer.parseInt(parts[1]);
-        boolean ifRemoved = false;
+        boolean ifRemoved = wiseList.removeIf(w -> w.id == idToRemove);
 
-        for (Wise wise : wiseList) {
-            if (wise.getId() == idToRemove) {
-                wiseList.remove(wise);
-                ifRemoved = true;
-                System.out.printf("%d번 명언이 삭제되었습니다.\n", idToRemove);
-                break;
-            }
-        }
-        if (!ifRemoved) {
+        if (ifRemoved) {
+            System.out.printf("%d번 명언이 삭제되었습니다.\n", idToRemove);
+        } else {
             System.out.printf("%d번 명언은 존재하지 않습니다.\n", idToRemove);
         }
     }
