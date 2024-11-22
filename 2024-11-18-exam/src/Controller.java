@@ -8,13 +8,6 @@ public class Controller {
     Scanner input = new Scanner(System.in);
     private int id = 1;
 
-    public void receiveCmd(String cmd) {
-        if (cmd.equals("등록")) { addWise(); }
-        else if (cmd.equals("목록")) { lookWise(); }
-        else if (cmd.startsWith("삭제?")) { removeWise(cmd); }
-        else if (cmd.startsWith("수정?")) { modifyWise(cmd); }
-    }
-
     public void addWise() {
         System.out.print("명언 : ");
         String saying = input.nextLine().trim();
@@ -39,6 +32,7 @@ public class Controller {
         }
         Collections.reverse(wiseList);
     }
+
     public void removeWise(String cmd) {
         String[] parts = cmd.split("=");
         int idToRemove = Integer.parseInt(parts[1]);
@@ -56,6 +50,7 @@ public class Controller {
             System.out.printf("%d번 명언은 존재하지 않습니다.\n", idToRemove);
         }
     }
+
     public void modifyWise(String cmd) {
         String[] parts = cmd.split("=");
         int idToRemove = Integer.parseInt(parts[1]);
