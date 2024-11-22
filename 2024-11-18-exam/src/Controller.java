@@ -11,7 +11,8 @@ public class Controller {
     public void receiveCmd(String cmd) {
         if (cmd.equals("등록")) { addWise(); }
         else if (cmd.equals("목록")) { lookWise(); }
-        else if (cmd.startsWith("삭제")) { removeWise(cmd); }
+        else if (cmd.startsWith("삭제?")) { removeWise(cmd); }
+        else if (cmd.startsWith("수정?")) { modifyWise(cmd); }
     }
 
     public void addWise() {
@@ -20,7 +21,6 @@ public class Controller {
 
         System.out.print("작가 : ");
         String author = input.nextLine().trim();
-
 
         Wise newWise = new Wise(id, author, saying);
         wiseList.add(newWise);
@@ -54,6 +54,22 @@ public class Controller {
         }
         if (!ifRemoved) {
             System.out.printf("%d번 명언은 존재하지 않습니다.\n", idToRemove);
+        }
+    }
+    public void modifyWise(String cmd) {
+        String[] parts = cmd.split("=");
+        int idToRemove = Integer.parseInt(parts[1]);
+
+        for (Wise wise : wiseList) {
+            if (wise.getId() == idToRemove) {
+                System.out.println("명언(기존) : " + wise.getSaying());
+                System.out.print("명언 : ");
+                wise.setSaying(input.nextLine().trim());
+
+                System.out.println("작가(기존) : " + wise.getAuthor());
+                System.out.print("작가 : ");
+                wise.setAuthor(input.nextLine().trim());
+            }
         }
     }
 }

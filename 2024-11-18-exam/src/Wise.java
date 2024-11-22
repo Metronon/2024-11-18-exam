@@ -20,4 +20,16 @@ public class Wise {
     public String getSaying() {
         return saying;
     }
+    /*
+    public void setId(int id) {
+        this.id = id;
+    }*/
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public void setSaying(String saying) {
+        this.saying = saying;
+    }
 }
