@@ -53,10 +53,11 @@ public class Controller {
 
     public void modifyWise(String cmd) {
         String[] parts = cmd.split("=");
-        int idToRemove = Integer.parseInt(parts[1]);
+        int idToModify = Integer.parseInt(parts[1]);
+        boolean ifRemoved = false;
 
         for (Wise wise : wiseList) {
-            if (wise.getId() == idToRemove) {
+            if (wise.getId() == idToModify) {
                 System.out.println("명언(기존) : " + wise.getSaying());
                 System.out.print("명언 : ");
                 wise.setSaying(input.nextLine().trim());
@@ -64,7 +65,13 @@ public class Controller {
                 System.out.println("작가(기존) : " + wise.getAuthor());
                 System.out.print("작가 : ");
                 wise.setAuthor(input.nextLine().trim());
+                ifRemoved = true;
+                break;
             }
+        }
+        if (!ifRemoved) {
+            System.out.printf("%d번 명언은 존재하지 않습니다.\n", idToModify);
         }
     }
 }
+
