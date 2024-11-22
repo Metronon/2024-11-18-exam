@@ -8,7 +8,11 @@ public class Controller {
     Scanner input = new Scanner(System.in);
     private int id = 1;
 
-    public void receiveCmd(String cmd) {}
+    public void receiveCmd(String cmd) {
+        if (cmd.equals("등록")) { addWise(); }
+        else if (cmd.equals("목록")) { lookWise(); }
+        else if (cmd.startsWith("삭제")) { removeWise(cmd); }
+    }
 
     public void addWise() {
         System.out.print("명언 : ");
@@ -34,5 +38,22 @@ public class Controller {
             System.out.println(wise.getId() + " / " + wise.getAuthor() + " / " + wise.getSaying());
         }
         Collections.reverse(wiseList);
+    }
+    public void removeWise(String cmd) {
+        String[] parts = cmd.split("=");
+        int idToRemove = Integer.parseInt(parts[1]);
+        boolean ifRemoved = false;
+
+        for (Wise wise : wiseList) {
+            if (wise.getId() == idToRemove) {
+                wiseList.remove(wise);
+                ifRemoved = true;
+                System.out.printf("%d번 명언이 삭제되었습니다.\n", idToRemove);
+                break;
+            }
+        }
+        if (!ifRemoved) {
+            System.out.printf("%d번 명언은 존재하지 않습니다.\n", idToRemove);
+        }
     }
 }
